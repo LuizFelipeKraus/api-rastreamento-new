@@ -42,7 +42,7 @@ def status():
     return jsonify({"status": status})
 
 
-@app.route('/rastreamento/docs')
+@app.route('/rastreamento/v3/docs')
 def docs():
     try:
         return render_template('index.html')
