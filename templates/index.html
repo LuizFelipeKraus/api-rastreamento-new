@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Favicons -->
+        <link rel="icon" type="image/png" sizes="192x192" href="https://alfatransportes.com.br/assets/uploads/favicon/android-icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="https://alfatransportes.com.br/assets/uploads/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="https://alfatransportes.com.br/assets/uploads/favicon/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="https://alfatransportes.com.br/assets/uploads/favicon/favicon-16x16.png" />
+
+        <title>Rastreamento Alfa Transportes</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+            * {
+                font-family: "Poppins", sans-serif;
+            }
+        </style>
+
+        <!-- Bootstrap -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-danger mb-5">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white fw-bold fs-4" href="#">Rastreamento Alfa Transportes</a>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-1 align-items-start mb-3">
+                <h1>Documentação API de Rastreamento <spam class="badge bg-danger">v1.3</spam></h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-1 align-items-start mb-3">
+                <p>
+                    Este documento foi desenvolvido para orientar o desenvolvimento de comunicações com a API de rastreamento da Alfa Transportes. Para consumir esta API, é necessário primeiramente
+                    entrar em contato com o comercial da matriz e solicitar uma chave de acesso único. Essa chave é a garantia da comunicação segura de ambos os lados. Com os exemplos e testes
+                    práticos abaixo, será possível realizar todos os testes antes de implementar em seu sistema.
+                </p>
+                <ul>
+                    <li>URL Base: https://api.alfatransportes.com.br/rastreamento/v1.3/</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-1 align-items-start mb-3 mt-5">
+                <h3>Contatos</h3>
+                <div class="list-group mt-2">
+                    <a href="mailto:comercial.matriz@alfatransportes.com.br" class="list-group-item list-group-item-action">comercial.matriz@alfatransportes.com.br - Comercial - Matriz</a>
+                    <a href="mailto:desenvolvimento@alfatransportes.com.br" class="list-group-item list-group-item-action">desenvolvimento@alfatransportes.com.br - NTI - Matriz</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-1 align-items-start mb-3 mt-5">
+                <h3>Parâmetros</h3>
+                <p>A requisição deverá ser do tipo POST, com um JSON no corpo da requisição que pode conter os seguintes campos.</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-1 mb-3 me-1">
+                <table class="table table-striped table-dark text-center">
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Descrição</th>
+                            <th>Tipo</th>
+                            <th>Tamanho</th>
+                            <th>Obrigatório</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>idr</td>
+                            <td>Chave de acesso (Identificação da Empresa Remetente)</td>
+                            <td>String</td>
+                            <td>30 - 40</td>
+                            <td>Sim</td>
+                        </tr>
+
+                        <tr>
+                            <td>numeroNota</td>
+                            <td>Número da Nota Fiscal</td>
+                            <td>Inteiro</td>
+                            <td>8</td>
+                            <td>Sim</td>
+                        </tr>
+
+                        <tr>
+                            <td>tomCnpj</td>
+                            <td>CNPJ</td>
+                            <td>Numérico</td>
+                            <td>14</td>
+                            <td>Não</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-1 align-items-start">
+                <div class="col mt-5 p-3 shadow rounded-3">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="text-center mt-3 mb-4">Dados do Remetente e Nota</h4>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-2">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="idr" maxlength="50" placeholder="0" />
+                                <label>Chave da API <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="merNF" maxlength="8" placeholder="0" />
+                                <label>Número da Nota Fiscal<span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="cnpjTomador" maxlength="14" placeholder="0" />
+                            <label>CNPJ do Remetente</label>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 py-3">
+                        <div class="col d-grid gap-2 col-md-6 mx-auto">
+                            <button onclick="enviarRequisicao()" class="btn btn-danger">Enviar Requisição</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-3 shadow rounded-3">
+            <div class="row row-cols-1 h-auto">
+                <div class="mt-3 px-5">
+                    <p>URL Requisitada:</p>
+                    <p class="text-break small text-danger" id="url-request"></p>
+                </div>
+                <h3 class="text-center mt-3">Corpo da requisição</h3>
+                <div class="col h-auto mx-auto p-3 px-5 shadow rounded-3 d-flex align-items-center">
+                    <textarea disabled lang="xml" style="border: none; height: 20vh; width: 100%" class="bg-dark text-white-50 mx-auto px-auto" id="corpo-request"></textarea>
+                </div>
+                <h3 class="text-center mt-3">Resposta</h3>
+                <div class="col h-auto mx-auto p-3 px-5 shadow rounded-3 d-flex align-items-center">
+                    <textarea disabled lang="xml" style="border: none; height: 20vh; width: 100%" class="bg-dark text-white-50 mx-auto px-auto" id="retorno-request"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-1 align-items-start">
+                <div class="col mt-5 p-3 shadow rounded-3">
+                    <div class="row row-cols-1 h-auto">
+                        <h3 class="text-center">Exemplo de Retorno Completo JSON</h3>
+                        <pre>
+                            {
+                                "status": 2,
+                                "nome": "RASTREAMENTO CONCLUIDO COM SUCESSO",
+                                "dadosTransportadora": {
+                                    "nomeTransportadora": "ALFA TRANSPORTES",
+                                    "cnpjTransportadora": "82110818000121",
+                                    "cidadeTransportadora": "ICARA"
+                                },
+                                "dadosRemetente": {
+                                    "nomeRemetente": "ALFA TRANSPORTES",
+                                    "cnpjRemetente": "82110818000121"
+                                },
+                                "dadosCte": {
+                                    "notas" : [
+                                        {
+                                            "numero":"9999",
+                                            "serie":"0",
+                                            "chave":"11111111111111111111111111111111111111111111"
+                                        }
+                                    ],
+                                    "numeroCte": "999999",
+                                    "valorCte": 81.6,
+                                    "dataEmissao": "2023-04-03",
+                                    "dataPrivista": "2023-04-10",
+                                    "nomeDestinatario": "ALFA TRANSPORTES",
+                                    "agenciaInicio": "ICARA",
+                                    "agenciaFim": "LOANDA",
+                                    "cidadeEntrega": "LOANDA"
+                                },
+                                "complemetar": [
+                                    {
+                                        "tipoCte":"CARRO DEDICADO",
+                                        "numeroCte" : "999999",
+                                        "serieCte": "0",
+                                        "valorCte": 550.25,
+                                    }
+                                ],
+                                "dadosEmbarque": {
+                                    "codigoViagem": "999999",
+                                    "cidadeOrigem": "CURITIBA",
+                                    "cidadeDestino": "MARINGA",
+                                    "horaSaida": "2023-04-04--21:25",
+                                    "horaChegada": "2023-04-05--04:52"
+                                },
+                                "dadosEntrega": {
+                                    "recebedorMercadoria": "Alfa Transportes",
+                                    "dataEntrega": "2023-04-05 15:03:00",
+                                    "urlComprovante": "https://areadocliente.alfatransportes.com.br/comprovante_safe.php?cte=MTtvNDk5NjQyNA=="
+                                },
+                                "ocorrenciasExtras":[
+                                    {"codigoOcorrencia":0,"dataOcorrencia":"19/02/2024 03:41","descricaoOcorrencia":"PROCESSO DE TRANSPORTE INICIADO"},
+                                    {"codigoOcorrencia":12,"dataOcorrencia":"20/02/2024 02:05","descricaoOcorrencia":"TRANSBORDO DA UNIDADE  DE MARINGA PARA BAURU"}
+                                ]
+                            }
+          				</pre
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-1 align-items-start">
+                <div class="col mt-5 p-3 shadow rounded-3">
+                    <div class="row row-cols-1 h-auto">
+                        <h3 class="text-center">Código e Retornos Possiveis</h3>
+                        <div class="col"><p class="text-break small text-danger"></p></div>
+                        <div class="container">
+                            <div class="row row-cols-1 row-cols-md-1 mb-3 me-1">
+                                <table class="table table-striped table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Descrição</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>RASTREAMENTO NAO CONCLUIDO.</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>2</td>
+                                            <td>RASTREAMENTO CONCLUIDO COM SUCESSO.</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>3</td>
+                                            <td>FALHA DE CONEXAO COM BANCO DE DADOS.</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>4</td>
+                                            <td>FALTA IDENTIFICACAO DO REMETENTE DA NOTA.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>FALHA AO VERIFICAR IDENTIFICACAO.</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>6</td>
+                                            <td>IDENTIFICACAO NAO ENCONTRADA.</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>7</td>
+                                            <td>FALHA AO RECUPERAR OS DADOS DA NOTA FISCAL.</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>8</td>
+                                            <td>FALTA NOTA FISCAL DA MERCADORIA.</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>9</td>
+                                            <td>NOTA FISCAL NAO ENCONTRADA NESTE CNPJ.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
+        <script>
+            function enviarRequisicao() {
+                let idr = document.getElementById("idr").value;
+                let merNF = document.getElementById("merNF").value;
+                let cnpjTomador = document.getElementById("cnpjTomador").value;
+
+                let url = "https://api.alfatransportes.com.br/rastreamento/v1.2/";
+                let json = {
+                    idr: idr,
+                    merNF: merNF,
+                    cnpjTomador: cnpjTomador,
+                };
+
+                urlRequestElement = document.getElementById("url-request");
+                urlRequestElement.textContent = url;
+
+                corpoRequestElement = document.getElementById("corpo-request");
+                corpoRequestElement.value = JSON.stringify(json);
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", url, false);
+                xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhttp.send(JSON.stringify(json));
+
+                retornoRequestElement = document.getElementById("retorno-request");
+                retornoRequestElement.value = xhttp.responseText;
+            }
+        </script>
+    </body>
+</html>
