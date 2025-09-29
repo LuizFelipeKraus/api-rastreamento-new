@@ -18,6 +18,7 @@ EXPOSE 8012
 # Comando executado ao iniciar o container
 CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=8012"]
 
+
 # Sugestão de comando para criar a imagem
 # docker build --tag api-rastreamento-v1.3-image .
 
