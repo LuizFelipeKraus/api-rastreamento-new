@@ -11,4 +11,4 @@ class StressTest(HttpUser):
             "cnpjTomador": "59064766000182",
             "modoJson":1
         }
-        self.client.post("/rastreamento/v1.2/", json=payload)
+        self.client.post("/rastreamento/v1.3/", json=payload)

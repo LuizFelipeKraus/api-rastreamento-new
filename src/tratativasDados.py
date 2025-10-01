@@ -275,7 +275,7 @@ class TratativasDAO:
             FROM doc027
             LEFT JOIN doc020 ON doc020.doc020_ser = doc027.doc020_complemt
             LEFT JOIN doc004 ON doc004.doc004_ser = doc020.doc004_ser
-            WHERE doc020_original = %s
+            WHERE doc020_original = %s AND doc003_ser in (3, 8)
         """
         parametros = [serialCte]
         dados_complementar = self.conexao.selecionar(sql, parametros)
